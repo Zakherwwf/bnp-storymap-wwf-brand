@@ -3,3 +3,6 @@ dist/
 .vercel/
 desktop.ini
 .DS_Store
+
+.vercel
+.env*

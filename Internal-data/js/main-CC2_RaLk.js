@@ -207,6 +207,10 @@ function O(t, e = {}, ...n) {
         null != r && !1 !== r && ("class" === o ? a.className = r : "text" === o ? a.textContent = r : o.startsWith("on") ? a.addEventListener(o.slice(2).toLowerCase(), r) : a.setAttribute(o, !0 === r ? "" : r));
     return a.append(...n.filter(Boolean)), a;
 }
+// Turns "*Acacia raddiana*" into <em> nodes; everything else stays plain text.
+function withEmphasis(t) {
+    return String(t ?? "").split(/\*([^*]+)\*/).map((s, i) => i % 2 ? O("em", { text: s }) : s).filter(Boolean);
+}
 const z = [
     null, 1, 2, 3, 4, 5
 ];
@@ -770,7 +774,7 @@ function ee(t) {
         return e ? [e, ...n] : n;
     }(t), n = O("div", { class: "chapter-card__narrative" });
     for (const a of b(t.narrative).split(/\n{2,}/))
-        n.append(O("p", { text: a }));
+        n.append(O("p", {}, ...withEmphasis(a)));
     const o = b(t.strikingFact), r = b(t.dayChip).replace(/\s·\s/g, ", "), i = t.buttons.find(t => "audio-play" === t.type);
     return O("div", { class: "chapter-card" + ((e.length || "Human-Wildlife-Coexistance" === t.id || "WWF NA Bootcamp" === t.id || "Reintroduction and Conservation" === t.id) ? " chapter-card--image-banner" : "") }, O("div", { class: "chapter-card__visual" }, O("header", { class: "chapter-card__header" }, O("h2", {
         class: "chapter-card__title", text: b(t.title)
@@ -912,8 +916,8 @@ function ce(t, e) {
         return e ? [e[1], e[2]] : [t, ""];
     }(b(e.metadata.title)), r = tt("ui/banner-biodiversity-page");
     t.replaceChildren(O("div", { class: "cover__inner" }, O("h1", {
-        class: "cover__title", id: "cover-title", text: n
-    }), o && O("p", {
+        class: "cover__title", id: "cover-title"
+    }, ...withEmphasis(n)), o && O("p", {
         class: "cover__subtitle", text: o
     }), O("p", { class: "cover__event" }, O("span", { text: _("cover.event") }), O("span", { text: _("cover.dates") })), O("div", { class: "cover__actions" }, O("button", {
         type: "button", class: "btn btn-primary", text: _("cover.begin"), onClick: () => a.emit("chapter:jump", { chapterId: e.chapters[0].id })
@@ -1624,7 +1628,7 @@ function na([t, e, n, a]) {
 }
 function aa(e, { mapView: n, bbox: o }) {
     const r = new URLSearchParams(window.location.search).get("basemap"), i = Kn.includes(r) ? r : "saharan";
-    l({ basemap: i }), t.setRTLTextPlugin("/data/vendor/mapbox-gl-rtl-text-0.2.3.js", !0).catch(() => {
+    l({ basemap: i }), t.setRTLTextPlugin(new URL("Internal-data/js/mapbox-gl-rtl-text-0.2.3.js", document.baseURI).href, !0).catch(() => {
     });
     try {
         Dn = new t.Map({

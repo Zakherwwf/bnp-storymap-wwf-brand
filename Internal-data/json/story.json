@@ -2,8 +2,8 @@
   "metadata": {
     "id": "bouhedma-last-savanna",
     "title": {
-      "en": "The last North African Savana",
-      "fr": "La dernière savane nord-africaine",
+      "en": "The last North African *savanna*",
+      "fr": "La dernière *savane* nord-africaine",
       "ar": "آخر سافانا في شمال إفريقيا"
     },
     "version": "1.0.0",
@@ -107,7 +107,7 @@
           "type": "species-modal",
           "target": "ORDA,NADA,GADO,AMLE,STCA",
           "label": {
-            "en": "Reintroduced Species List",
+            "en": "Reintroduced species",
             "fr": "Voir ces espèces",
             "ar": "اعرض هذه الأنواع"
           }
@@ -205,8 +205,8 @@
           "type": "protocol-drawer",
           "target": "flora-protocol",
           "label": {
-            "en": "flora monitoring protocol",
-            "fr": "protocole de suivi de la flore",
+            "en": "Monitoring protocol",
+            "fr": "Protocole de suivi",
             "ar": "بروتوكول رصد النباتات"
           }
         },
@@ -214,7 +214,7 @@
           "type": "species-modal",
           "target": "group:flora",
           "label": {
-            "en": "Species List",
+            "en": "Species list",
             "fr": "Voir les espèces végétales",
             "ar": "اعرض الأنواع النباتية"
           }
@@ -277,7 +277,7 @@
           "type": "species-modal",
           "target": "group:birds",
           "label": {
-            "en": "Species List",
+            "en": "Species list",
             "fr": "Oiseaux et leurs chants",
             "ar": "الطيور وأصواتها"
           }
@@ -342,7 +342,7 @@
           "type": "species-modal",
           "target": "group:antelopes",
           "label": {
-            "en": "Species List",
+            "en": "Species list",
             "fr": "Voir les espèces d’antilopes",
             "ar": "اعرض أنواع الظباء"
           }
@@ -405,7 +405,7 @@
           "type": "species-modal",
           "target": "group:rodents",
           "label": {
-            "en": "Species List",
+            "en": "Species list",
             "fr": "Voir les espèces de rongeurs",
             "ar": "اعرض أنواع القوارض"
           }
@@ -468,7 +468,7 @@
           "type": "species-modal",
           "target": "group:bats",
           "label": {
-            "en": "Species List",
+            "en": "Species list",
             "fr": "Voir les espèces de chauves-souris",
             "ar": "اعرض أنواع الخفافيش"
           }
@@ -530,7 +530,7 @@
           "type": "species-modal",
           "target": "group:insects",
           "label": {
-            "en": "Species List",
+            "en": "Species list",
             "fr": "Voir les espèces d’insectes",
             "ar": "اعرض أنواع الحشرات"
           }
@@ -594,7 +594,7 @@
           "type": "species-modal",
           "target": "group:carnivores",
           "label": {
-            "en": "Species List",
+            "en": "Species list",
             "fr": "Voir les espèces de carnivores",
             "ar": "اعرض أنواع اللواحم"
           }
@@ -651,7 +651,7 @@
           "type": "protocol-drawer",
           "target": "Open Source Database",
           "label": {
-            "en": "Access Open Source Database",
+            "en": "Open the field database",
             "fr": "Accéder à la base de données ouverte",
             "ar": "الوصول إلى قاعدة البيانات المفتوحة"
           }
@@ -660,7 +660,7 @@
           "type": "species-modal",
           "target": "group:all",
           "label": {
-            "en": "Complete Species List",
+            "en": "Full species list",
             "fr": "Liste complète des espèces",
             "ar": "القائمة الكاملة للأنواع"
           }

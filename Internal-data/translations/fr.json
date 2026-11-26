@@ -310,5 +310,14 @@
   "layer.zone_exploit.hint": "Zones d'exploitation anthropique temporaire 4 et 5",
   "layer.zone_integral": "Zones de protection intégrale",
   "layer.zone_buffer": "Zones tampons",
-  "layer.zone_exploit": "Zones d'exploitation saisonnière"
+  "layer.zone_exploit": "Zones d'exploitation saisonnière",
+  "footer.mission": "Agir pour préserver la nature, au bénéfice des populations et de la faune sauvage.",
+  "cover.photo_alt": "Une gazelle se tient parmi les acacias et les pierres, le regard tourné vers l’objectif.",
+  "numbers.title": "L’académie en chiffres",
+  "numbers.practitioners": "praticiens de terrain",
+  "numbers.days": "jours dans le parc",
+  "numbers.protocols": "protocoles de suivi",
+  "numbers.species": "espèces recensées",
+  "numbers.stations": "stations acoustiques proposées",
+  "numbers.layers": "couches cartographiques ouvertes"
 }

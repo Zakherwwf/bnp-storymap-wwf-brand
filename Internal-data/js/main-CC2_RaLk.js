@@ -786,7 +786,9 @@ function ee(t) {
         class: "chapter-card__day-chip", text: r
     }))), "Human-Wildlife-Coexistance" === t.id && O("img", { class: "chapter-card__coexistence-banner", src: "Internal-data/ui-assets/banner-coexistance-page.webp", alt: "Illustration of human-wildlife coexistence", loading: "lazy", decoding: "async" }), "WWF NA Bootcamp" === t.id && O("img", { class: "chapter-card__section-banner", src: "Internal-data/ui-assets/banner-camp.webp", alt: "Savanna camp landscape", loading: "lazy", decoding: "async" }), "Reintroduction and Conservation" === t.id && O("img", { class: "chapter-card__section-banner", src: "Internal-data/ui-assets/conserve.png", alt: "Reintroduction and conservation at Bouhedma", loading: "lazy", decoding: "async" }), ("WWF NA Bootcamp" === t.id || "Reintroduction and Conservation" === t.id) ? null : Jt(t, e)), n, o && O("aside", { class: "chapter-card__fact" }, O("p", {
         class: "chapter-card__fact-label", text: _("chapter.striking_fact")
-    }), O("p", { text: o })), te(t), O("div", { class: "chapter-card__actions" }, ...t.buttons.map(e => function (t, e) {
+    }), O("p", { text: o })), "Summary" === t.id && O("dl", { class: "key-numbers" }, ...[
+        ["30", "numbers.practitioners"], ["6", "numbers.days"], ["7", "numbers.protocols"], ["163", "numbers.species"], ["20", "numbers.stations"], ["29", "numbers.layers"]
+    ].map(([v, k]) => O("div", { class: "key-numbers__item" }, O("dt", { text: v }), O("dd", { text: _(k) })))), te(t), O("div", { class: "chapter-card__actions" }, ...t.buttons.map(e => function (t, e) {
         const n = b(t.label), o = `btn ${Gt[t.type] ?? "btn-secondary"}`;
         if ("download" === t.type)
             return O("a", {
@@ -865,9 +867,10 @@ function re(t, e) {
         });
         
     }(d), d.append(r), 
-    t.append(O("a", { class: "nav-bar__brand", href: "#", style: "text-decoration: none; display: flex; align-items: center; gap: 12px; cursor: pointer;" }, O("img", {
-    class: "nav-bar__logo", src: tt("ui/logo")?.sm ?? "Internal-data/ui-assets/partners/bouhedma-logo.png", alt: "", width: 40, height: 40
-   }), l), O("div", { class: "nav-bar__breadcrumb" }, function () {
+    // WWF box logo, divider, then the place as the "country identifier" (WWF publication guidelines).
+    t.append(O("a", { class: "nav-bar__brand", href: "#" }, O("span", { class: "nav-bar__boxlogo" }, O("img", {
+    class: "nav-bar__logo", src: "Internal-data/ui-assets/brand/wwf-logo.png", alt: "WWF", width: 40, height: 45
+   })), l), O("div", { class: "nav-bar__breadcrumb" }, function () {
         const t = O("span", {
             class: "nav-bar__chapters-icon", "aria-hidden": "true"
         });
@@ -914,18 +917,17 @@ function ce(t, e) {
     const [n, o] = function (t) {
         const e = t.match(/^(.+?)\s*[:：]\s*(.+)$/);
         return e ? [e[1], e[2]] : [t, ""];
-    }(b(e.metadata.title)), r = tt("ui/banner-biodiversity-page");
-    t.replaceChildren(O("div", { class: "cover__inner" }, O("h1", {
+    }(b(e.metadata.title));
+    // WWF publication cover: full-bleed field photo inside a white border, black content box for the title.
+    t.replaceChildren(O("figure", { class: "cover__photo" }, O("img", {
+        src: "Internal-data/ui-assets/brand/cover-gazelle.webp", srcset: "Internal-data/ui-assets/brand/cover-gazelle-sm.webp 900w, Internal-data/ui-assets/brand/cover-gazelle.webp 2000w", sizes: "100vw", width: 2000, height: 1084, alt: _("cover.photo_alt"), decoding: "async", fetchpriority: "high"
+    }), O("figcaption", { class: "cover__credit", text: "© Wael Ben Aba" })), O("div", { class: "cover__inner" }, O("h1", {
         class: "cover__title", id: "cover-title"
     }, ...withEmphasis(n)), o && O("p", {
         class: "cover__subtitle", text: o
     }), O("p", { class: "cover__event" }, O("span", { text: _("cover.event") }), O("span", { text: _("cover.dates") })), O("div", { class: "cover__actions" }, O("button", {
         type: "button", class: "btn btn-primary", text: _("cover.begin"), onClick: () => a.emit("chapter:jump", { chapterId: e.chapters[0].id })
-    }))), r && O("div", {
-        class: "cover__plate", "aria-hidden": "true"
-    }, O("img", {
-        src: r.src, srcset: `${r.sm} 1100w, ${r.src} ${r.w}w`, sizes: "100vw", width: r.w, height: r.h, alt: "", decoding: "async", fetchpriority: "high"
-    })), O("div", { class: "cover__foot" }, O("ul", {
+    }))), O("div", { class: "cover__foot" }, O("ul", {
         class: "cover__partners", "aria-label": _("footer.partners")
     }, ...le.map(({ name: t, logo: e, dgf: n }) => O("li", {}, O("img", {
         src: e, alt: n ? _("footer.dgf") : t, loading: "eager", height: 36
@@ -1024,10 +1026,11 @@ function fe(t) {
             })(de[e]));
         } };
 }
-const ye = "#2D5016", _e = "#4A7C3F", be = "#C8A96E", we = "#B85C38", ve = "#3B82A6", xe = "#6E685F", ke = "#FAFAF5", Ee = "#E8A838", Se = "#9D72FF", Ae = "#E63946", Ce = "#0D1B2A", $e = {
+// Field layers use full-strength WWF secondary swatches (Green, Olive, Brown, Orange, Aqua, Yellow, Berry, Red).
+const ye = "#007932", _e = "#7B8427", be = "#9A681C", we = "#F07D00", ve = "#009191", xe = "#6F6F6F", ke = "#FFFFFF", Ee = "#F5D200", Se = "#812990", Ae = "#DA1D52", Ce = "#000000", $e = {
     bat_net: ["diamond", Se], camera_traps: ["triangle", Ae], insect_station: ["circle", Ee], rodent_cage: ["square", we], bio_index_points: ["triangle", we], gps1_species: ["triangle", be], gps5_species: ["circle", be], pam_sites: ["diamond", ye], pam_trees: ["circle", _e], water_sources: ["circle", ve], ain_charchara: ["diamond", ve], group1_plants: ["circle", _e], group2_stakes: ["square", _e], transect_plant: ["triangle", _e], eco_parc: ["square", ye], chateau_francais: ["square", xe], powerlines: ["circle", xe]
 }, Le = {
-    park_boundary: ye, aoi_2km: be, camp: we, enclos_autriche: we, enclos_mouflon: we, roads: xe, road_exclusion: we, gps4_trail: be, gps6_trail: Ae, itinerary_camera_trap: Ae, bio_index_transect: we, itinerary_ain_charchara: ve, plan_transect: _e, group3_track: _e, zone_integral: "#0a7a3a", zone_buffer: "#5fb38a", zone_exploit: "#c9d63a"
+    park_boundary: ye, aoi_2km: be, camp: we, enclos_autriche: we, enclos_mouflon: we, roads: xe, road_exclusion: we, gps4_trail: be, gps6_trail: Ae, itinerary_camera_trap: Ae, bio_index_transect: we, itinerary_ain_charchara: ve, plan_transect: _e, group3_track: _e, zone_integral: "#007932", zone_buffer: "#8CC63F", zone_exploit: "#C4BC8E"
 }, Me = new Set([
     "park_boundary", "aoi_2km", "camp", "enclos_autriche", "enclos_mouflon", "road_exclusion", "zone_integral", "zone_buffer", "zone_exploit"
 ]), Ie = new Set(["park_boundary", "aoi_2km", "road_exclusion", "zone_integral", "zone_buffer", "zone_exploit"]), Te = [
@@ -1161,7 +1164,7 @@ function Ve(t) {
                 const e = Be(t), n = qe("svg", {
                     viewBox: "0 0 24 24", width: 22, height: 22, "aria-hidden": "true", class: "map-legend__swatch"
                 }), a = {
-                    fill: e.color, stroke: "#FAFAF5", "stroke-width": 2
+                    fill: e.color, stroke: "#FFFFFF", "stroke-width": 2
                 };
                 return "point" === e.kind ? ("circle" === e.shape && n.append(qe("circle", {
                     cx: 12, cy: 12, r: 7, ...a
@@ -1195,22 +1198,22 @@ const We = {
             type: "vector", url: "https://tiles.openfreemap.org/planet"
         } }, glyphs: "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf", layers: [
         {
-            id: "background", type: "background", paint: { "background-color": "#F5F0E8" }
+            id: "background", type: "background", paint: { "background-color": "#F4F4F2" }
         }, {
             id: "landcover", type: "fill", source: "openmaptiles", "source-layer": "landcover", paint: {
-                "fill-color": "#4A7C3F", "fill-opacity": .14
+                "fill-color": "#000000", "fill-opacity": .045
             }
         }, {
             id: "park", type: "fill", source: "openmaptiles", "source-layer": "park", paint: {
-                "fill-color": "#4A7C3F", "fill-opacity": .1
+                "fill-color": "#007932", "fill-opacity": .06
             }
         }, {
             id: "water", type: "fill", source: "openmaptiles", "source-layer": "water", paint: {
-                "fill-color": "#3B82A6", "fill-opacity": .55
+                "fill-color": "#00728F", "fill-opacity": .55
             }
         }, {
             id: "waterway", type: "line", source: "openmaptiles", "source-layer": "waterway", paint: {
-                "line-color": "#3B82A6", "line-opacity": .55, "line-width": [
+                "line-color": "#00728F", "line-opacity": .55, "line-width": [
                     "interpolate", ["linear"], ["zoom"], 8, .5, 14, 1.6
                 ]
             }
@@ -1220,13 +1223,13 @@ const We = {
                     ]]], layout: {
                 "line-cap": "round", "line-join": "round"
             }, paint: {
-                "line-color": "#6E685F", "line-opacity": .7, "line-width": [
+                "line-color": "#8A8A8A", "line-opacity": .7, "line-width": [
                     "interpolate", ["linear"], ["zoom"], 7, .4, 12, 1, 16, 3
                 ]
             }
         }, {
             id: "boundaries", type: "line", source: "openmaptiles", "source-layer": "boundary", filter: ["<=", ["get", "admin_level"], 4], layout: { "line-join": "round" }, paint: {
-                "line-color": "#C8A96E", "line-dasharray": [3, 2], "line-width": [
+                "line-color": "#9A9A9A", "line-dasharray": [3, 2], "line-width": [
                     "interpolate", ["linear"], ["zoom"], 3, .6, 10, 1.6
                 ]
             }
@@ -1234,13 +1237,13 @@ const We = {
             id: "water-labels", type: "symbol", source: "openmaptiles", "source-layer": "water_name", layout: {
                 "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Italic"], "text-size": 12
             }, paint: {
-                "text-color": "#2D5016", "text-halo-color": "#F5F0E8", "text-halo-width": 1.2
+                "text-color": "#00728F", "text-halo-color": "#F4F4F2", "text-halo-width": 1.2
             }
         }, {
             id: "road-labels", type: "symbol", source: "openmaptiles", "source-layer": "transportation_name", minzoom: 11, layout: {
                 "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Regular"], "text-size": 11, "symbol-placement": "line"
             }, paint: {
-                "text-color": "#6E685F", "text-halo-color": "#F5F0E8", "text-halo-width": 1.2
+                "text-color": "#8A8A8A", "text-halo-color": "#F4F4F2", "text-halo-width": 1.2
             }
         }, {
             id: "place-labels", type: "symbol", source: "openmaptiles", "source-layer": "place", filter: ["in", ["get", "class"], ["literal", [
@@ -1250,28 +1253,28 @@ const We = {
                     "interpolate", ["linear"], ["zoom"], 4, 11, 12, 15
                 ], "text-max-width": 8
             }, paint: {
-                "text-color": "#2C2C2C", "text-halo-color": "#F5F0E8", "text-halo-width": 1.4
+                "text-color": "#111111", "text-halo-color": "#F4F4F2", "text-halo-width": 1.4
             }
         }
     ]
 }, He = { layers: [
         {
-            id: "background", type: "background", paint: { "background-color": "#0D1B2A" }
+            id: "background", type: "background", paint: { "background-color": "#0A0A0A" }
         }, {
             id: "landcover", type: "fill", source: "openmaptiles", "source-layer": "landcover", paint: {
-                "fill-color": "#24384E", "fill-opacity": .35
+                "fill-color": "#262626", "fill-opacity": .35
             }
         }, {
             id: "park", type: "fill", source: "openmaptiles", "source-layer": "park", paint: {
-                "fill-color": "#24384E", "fill-opacity": .3
+                "fill-color": "#262626", "fill-opacity": .3
             }
         }, {
             id: "water", type: "fill", source: "openmaptiles", "source-layer": "water", paint: {
-                "fill-color": "#162536", "fill-opacity": 1
+                "fill-color": "#0E2A31", "fill-opacity": 1
             }
         }, {
             id: "waterway", type: "line", source: "openmaptiles", "source-layer": "waterway", paint: {
-                "line-color": "#24384E", "line-opacity": 1, "line-width": [
+                "line-color": "#262626", "line-opacity": 1, "line-width": [
                     "interpolate", ["linear"], ["zoom"], 8, .5, 14, 1.6
                 ]
             }
@@ -1281,13 +1284,13 @@ const We = {
                     ]]], layout: {
                 "line-cap": "round", "line-join": "round"
             }, paint: {
-                "line-color": "#24384E", "line-opacity": 1, "line-width": [
+                "line-color": "#262626", "line-opacity": 1, "line-width": [
                     "interpolate", ["linear"], ["zoom"], 7, .4, 12, 1, 16, 3
                 ]
             }
         }, {
             id: "boundaries", type: "line", source: "openmaptiles", "source-layer": "boundary", filter: ["<=", ["get", "admin_level"], 4], layout: { "line-join": "round" }, paint: {
-                "line-color": "#8C9BAE", "line-dasharray": [3, 2], "line-width": [
+                "line-color": "#9A9A9A", "line-dasharray": [3, 2], "line-width": [
                     "interpolate", ["linear"], ["zoom"], 3, .6, 10, 1.6
                 ]
             }
@@ -1295,13 +1298,13 @@ const We = {
             id: "water-labels", type: "symbol", source: "openmaptiles", "source-layer": "water_name", layout: {
                 "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Italic"], "text-size": 12
             }, paint: {
-                "text-color": "#8C9BAE", "text-halo-color": "#0D1B2A", "text-halo-width": 1.2
+                "text-color": "#9A9A9A", "text-halo-color": "#0A0A0A", "text-halo-width": 1.2
             }
         }, {
             id: "road-labels", type: "symbol", source: "openmaptiles", "source-layer": "transportation_name", minzoom: 11, layout: {
                 "text-field": ["coalesce", ["get", "name:en"], ["get", "name"]], "text-font": ["Noto Sans Regular"], "text-size": 11, "symbol-placement": "line"
             }, paint: {
-                "text-color": "#8C9BAE", "text-halo-color": "#0D1B2A", "text-halo-width": 1.2
+                "text-color": "#9A9A9A", "text-halo-color": "#0A0A0A", "text-halo-width": 1.2
             }
         }, {
             id: "place-labels", type: "symbol", source: "openmaptiles", "source-layer": "place", filter: ["in", ["get", "class"], ["literal", [
@@ -1311,7 +1314,7 @@ const We = {
                     "interpolate", ["linear"], ["zoom"], 4, 11, 12, 15
                 ], "text-max-width": 8
             }, paint: {
-                "text-color": "#EAE6DF", "text-halo-color": "#0D1B2A", "text-halo-width": 1.4
+                "text-color": "#E6E6E6", "text-halo-color": "#0A0A0A", "text-halo-width": 1.4
             }
         }
     ] }, Ke = "sentinel2-cloudless", Ue = "satellite-imagery", Ze = ["https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2025_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg"], Ge = {
@@ -1323,9 +1326,9 @@ const We = {
 };
 const Ye = "terrain-dem", Xe = "terrain-hillshade", Je = ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"], Qe = {
     day: {
-        "hillshade-shadow-color": "#6E685F", "hillshade-highlight-color": "#FAFAF5", "hillshade-accent-color": "#E8DCC8"
+        "hillshade-shadow-color": "#5A5A5A", "hillshade-highlight-color": "#FFFFFF", "hillshade-accent-color": "#E2E2E2"
     }, night: {
-        "hillshade-shadow-color": "#0D1B2A", "hillshade-highlight-color": "#8C9BAE", "hillshade-accent-color": "#24384E"
+        "hillshade-shadow-color": "#000000", "hillshade-highlight-color": "#4A4A4A", "hillshade-accent-color": "#1C1C1C"
     }
 };
 const tn = "ov-", en = [
@@ -1501,7 +1504,7 @@ function Bn(t, e) {
     const n = e => en.map(t => fn(t, e)).filter(e => t.getLayer(e)), a = [[e.x - 8, e.y - 8], [e.x + 8, e.y + 8]];
     return t.queryRenderedFeatures(e, { layers: n("point") })[0] ?? t.queryRenderedFeatures(a, { layers: n("line") })[0] ?? t.queryRenderedFeatures(e, { layers: n("fill") }).find(t => !Ie.has(t.properties.layer));
 }
-const Pn = "#0D1B2A", Fn = "#162536", jn = "#24384E", Nn = "#24384E", On = "#8C9BAE", zn = "#0D1B2A";
+const Pn = "#0A0A0A", Fn = "#141414", jn = "#0E2A31", Nn = "#262626", On = "#9A9A9A", zn = "#0A0A0A";
 let Dn = null, Rn = 0, qn = !1, Vn = !1, Wn = new Map;
 function Hn() {
     return Dn;
@@ -1517,7 +1520,7 @@ function Un(t) {
                 id: Ue, type: "raster", source: Ke, paint: Ge.day
             }, ...We.layers.filter(t => "symbol" === t.type && "openmaptiles" === t.source).map(t => ({
                 ...t, paint: {
-                    ...t.paint, "text-color": "#FAFAF5", "text-halo-color": "#0D1B2A", "text-halo-width": 1.4
+                    ...t.paint, "text-color": "#FFFFFF", "text-halo-color": "#000000", "text-halo-width": 1.4
                 }
             }))]
     } : We;
@@ -1812,7 +1815,7 @@ function Ba(t, e) {
     const n = "nocturnal-night" === t.theme ? "night" : "day", a = n !== s().theme;
     l({
         chapterId: t.id, chapterIndex: t.index, theme: n
-    }), document.documentElement.dataset.theme = n, a && function (t) {
+    }), document.documentElement.dataset.theme = n, document.documentElement.dataset.chapter = t.id, a && function (t) {
         Vn && Yn(t, s().reducedMotion ? 0 : 1200);
     }(n);
     for (const i of document.querySelectorAll(".chapter-card.is-active"))
@@ -1897,12 +1900,11 @@ function ja(t, e, n) {
             e.append(ee(a)), t.append(e);
         }
     }(n, t), function (t) {
-        const e = () => {
-            const t = tt("");
-            return t && O("img", {
-                class: "site-footer__plate", src: t.sm, srcset: et(t), sizes: "(min-width: 900px) 860px, 100vw", width: t.w, height: t.h, alt: "", loading: "lazy", decoding: "async"
-            });
-        }, n = () => t.replaceChildren(...[e(), se(), O("div", { class: "site-footer__credits" }, O("p", {
+        // WWF boilerplate badge: box logo | mission statement, "together possible" and panda.org.
+        const e = () => O("div", { class: "boilerplate" }, O("span", { class: "boilerplate__logo" }, O("img", {
+                src: "Internal-data/ui-assets/brand/wwf-logo.png", alt: "WWF", width: 80, height: 90, loading: "lazy"
+            })), O("div", { class: "boilerplate__text" }, O("p", { class: "boilerplate__mission", text: _("footer.mission") }), O("p", { class: "boilerplate__marks" }, O("span", { class: "boilerplate__together", lang: "en", text: "together possible" }), O("a", { class: "boilerplate__url", href: "https://www.wwfna.org", rel: "noopener", text: "wwfna.org" }))));
+        const n = () => t.replaceChildren(...[se(), e(), O("div", { class: "site-footer__credits" }, O("p", {
                 class: "site-footer__lead", text: _("footer.credits")
             }), O("p", { text: _("footer.media_credits") }), O("p", {}, O("a", {
                 href: "https://creativecommons.org/licenses/by-nc-sa/4.0/", rel: "license noopener", text: _("footer.license")

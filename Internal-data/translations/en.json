@@ -315,10 +315,10 @@
   "footer.mission": "Working to sustain the natural world for the benefit of people and wildlife.",
   "cover.photo_alt": "A gazelle stands among acacia scrub and stones, looking towards the camera.",
   "numbers.title": "The academy in numbers",
-  "numbers.practitioners": "field practitioners",
   "numbers.days": "days in the park",
   "numbers.protocols": "monitoring protocols",
   "numbers.species": "species in the checklist",
   "numbers.stations": "proposed acoustic stations",
-  "numbers.layers": "open map layers"
+  "numbers.layers": "open map layers",
+  "numbers.water": "water sources mapped in the field"
 }

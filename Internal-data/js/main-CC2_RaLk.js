@@ -787,7 +787,7 @@ function ee(t) {
     }))), "Human-Wildlife-Coexistance" === t.id && O("img", { class: "chapter-card__coexistence-banner", src: "Internal-data/ui-assets/banner-coexistance-page.webp", alt: "Illustration of human-wildlife coexistence", loading: "lazy", decoding: "async" }), "WWF NA Bootcamp" === t.id && O("img", { class: "chapter-card__section-banner", src: "Internal-data/ui-assets/banner-camp.webp", alt: "Savanna camp landscape", loading: "lazy", decoding: "async" }), "Reintroduction and Conservation" === t.id && O("img", { class: "chapter-card__section-banner", src: "Internal-data/ui-assets/conserve.png", alt: "Reintroduction and conservation at Bouhedma", loading: "lazy", decoding: "async" }), ("WWF NA Bootcamp" === t.id || "Reintroduction and Conservation" === t.id) ? null : Jt(t, e)), n, o && O("aside", { class: "chapter-card__fact" }, O("p", {
         class: "chapter-card__fact-label", text: _("chapter.striking_fact")
     }), O("p", { text: o })), "Summary" === t.id && O("dl", { class: "key-numbers" }, ...[
-        ["30", "numbers.practitioners"], ["6", "numbers.days"], ["7", "numbers.protocols"], ["163", "numbers.species"], ["20", "numbers.stations"], ["29", "numbers.layers"]
+        ["6", "numbers.days"], ["10", "numbers.water"], ["7", "numbers.protocols"], ["163", "numbers.species"], ["20", "numbers.stations"], ["29", "numbers.layers"]
     ].map(([v, k]) => O("div", { class: "key-numbers__item" }, O("dt", { text: v }), O("dd", { text: _(k) })))), te(t), O("div", { class: "chapter-card__actions" }, ...t.buttons.map(e => function (t, e) {
         const n = b(t.label), o = `btn ${Gt[t.type] ?? "btn-secondary"}`;
         if ("download" === t.type)

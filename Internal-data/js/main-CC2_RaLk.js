@@ -398,22 +398,50 @@ function bt() {
     return _t ??= fetch(d("Internal-data/json/species.json")).then(t => t.json()).then(t => t.species), _t;
 }
 let wt = null, vt = null, xt = null;
-const kt = t => (t ?? "").toLowerCase().split(/\s+/).slice(0, 2).join(" ");
+let birdAudioDataPromise = null;
+async function loadBirdAudioData() {
+    if (!birdAudioDataPromise) {
+        birdAudioDataPromise = Promise.all([
+            fetch(d("Internal-data/json/bird-audio.json")),
+            fetch(d("Public-data/downloads/audio_dataset.csv"))
+        ]).then(async ([audioResponse, attributionResponse]) => {
+            if (!audioResponse.ok)
+                throw new Error(`bird-audio.json: ${audioResponse.status}`);
+            if (!attributionResponse.ok)
+                throw new Error(`audio_dataset.csv: ${attributionResponse.status}`);
+            const files = await audioResponse.json(), csv = (await attributionResponse.text()).replace(/^\uFEFF/, "").trim();
+            const [header, ...rows] = csv.split(/\r?\n/), columns = header.split(",").map(t => t.trim().toLowerCase());
+            const nameIndex = columns.indexOf("specie"), sourceIndex = columns.indexOf("audio licence");
+            if (nameIndex < 0 || sourceIndex < 0)
+                throw new Error("audio_dataset.csv is missing the specie or audio licence column");
+            const sources = new Map(rows.map(t => t.split(",").map(t => t.trim())).filter(t => t[nameIndex] && t[sourceIndex]).map(t => [t[nameIndex], t[sourceIndex]]));
+            return { files, sources };
+        });
+    }
+    return birdAudioDataPromise;
+}
 async function Et(t) {
     const e = await bt();
+    let species;
     if (t.startsWith("group:")) {
-        const n = t.slice(6), a = "all" === n ? e : e.filter(t => t.group === n);
-        return "birds" === n ? function (t) {
-            const e = T().sounds ?? [], n = t.map(t => {
-                const n = e.find(e => kt(e.scientificName) === kt(t.scientificName));
-                return n ? {
-                    ...t, sound: n.id, subgroup: t.subgroup ?? n.subgroup
-                } : t;
-            });
-            return n;
-        }(a) : a;
-    }
-    return t.split(",").map(t => e.find(e => e.code === t)).filter(Boolean);
+        const n = t.slice(6);
+        species = "all" === n ? e : e.filter(t => t.group === n);
+    } else
+        species = t.split(",").map(t => e.find(e => e.code === t)).filter(Boolean);
+    if (!species.some(t => t.group === "birds"))
+        return species;
+    const { files, sources } = await loadBirdAudioData();
+    return species.map(t => {
+        if (t.group !== "birds")
+            return t;
+        const n = t.name.en, a = files[n], o = sources.get(n);
+        if (!a || !o)
+            throw new Error(`Missing audio file or attribution for ${n}`);
+        const r = `species-${t.code}`;
+        return $.set(r, { id: r, audio: a, name: t.name, scientificName: t.scientificName, group: t.group, subgroup: t.subgroup }), {
+            ...t, sound: r, audioSource: o
+        };
+    });
 }
 function St(t) {
     if (!t)
@@ -447,17 +475,18 @@ function Lt(t) {
         class: "species-card__scientific", lang: "la", dir: "ltr", text: t.scientificName
     }), n && O("p", {
         class: "species-card__description", text: n
-    }), t.sound && function (t) {
+    }), (t.sound || t.audioSource) && O("div", { class: "species-card__audio-controls" }, t.sound && function (t) {
         const e = O("span", {
             class: "species-card__listen-icon", "aria-hidden": "true"
         }), n = O("button", {
             type: "button", class: "species-card__listen", "data-sound": t.sound, onClick: () => j(t.sound)
         }, e, O("span", { text: _("species.listen") }));
         return Ct(n), n;
-    }(t), O("div", { class: "species-card__meta" }, O("span", {
+    }(t), t.audioSource && O("a", {
+        class: "species-card__audio-credit", href: t.audioSource, target: "_blank", rel: "noopener noreferrer",
+        title: _("species.audio_credit", { name: t.name.en }), "aria-label": _("species.audio_credit", { name: t.name.en })
+    }, O("span", { class: "species-card__audio-credit-mark", "aria-hidden": "true", text: "CC" }))), O("div", { class: "species-card__meta" }, O("span", {
         class: "iucn-pill", "data-status": e ?? "NE", text: e ? `${e} · ${_(`iucn.${e}`)}` : _("species.not_assessed")
-    }), t.code && O("span", {
-        class: "meta-badge meta-badge--code", dir: "ltr", text: t.code
     }), t.reintroduced && O("span", {
         class: "meta-badge", text: `${_("species.reintroduced")} ${t.reintroduced}`
     })), a && O("p", { class: "species-card__habitat" }, O("strong", { text: `${_("species.habitat")} ` }), a)));

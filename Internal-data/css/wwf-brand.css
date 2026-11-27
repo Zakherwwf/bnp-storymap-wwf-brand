@@ -568,17 +568,6 @@ html[data-theme=night] .chapter-card__header::after {
   color: #1A1A1A;
 }
 
-/* Section artwork is omitted across the story and protocols. Keep the
-   dedicated Summary banner as the exception. */
-.narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__coexistence-banner,
-.narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__section-banner,
-.narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__media,
-.narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__zoom,
-.protocol-modal .deck-figure,
-.protocol-modal .deck-diagram {
-  display: none !important;
-}
-
 html[lang=ar] .chapter-card__narrative {
   font-family: var(--font-arabic-body);
   line-height: 1.85;

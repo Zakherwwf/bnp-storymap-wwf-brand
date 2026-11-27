@@ -4776,8 +4776,6 @@ html[dir="rtl"] .chapter-carousel__nav svg {
 .narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__coexistence-banner,
 .narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__section-banner,
 .narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__media,
-.narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__zoom,
-.protocol-modal .deck-figure,
-.protocol-modal .deck-diagram {
+.narrative-step[data-chapter-id]:not([data-chapter-id="Summary"]) .chapter-card__zoom {
   display: none !important;
 }
